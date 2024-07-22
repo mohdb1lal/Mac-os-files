@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Objectives and Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .column {
+            float: left;
+            width: 30%;
+            margin-right: 3.33%;
+        }
+        .column:last-child {
+            margin-right: 0;
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            background-color: #f4f4f4;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        li input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .published-notes {
+            margin-top: 20px;
+        }
+        .published-notes h2 {
+            color: #4CAF50;
+        }
+        .published-notes div {
+            background-color: #e9e9e9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Team Objectives and Current Status</h1>
+        </div>
+        <div class="clearfix">
+            <div class="column">
+                <h2>To-Do Things</h2>
+                <textarea id="todo" rows="10" placeholder="List your to-do items here..."></textarea>
+                <button onclick="addToDo()">Add To-Do</button>
+                <ul id="todo-list"></ul>
+            </div>
+            <div class="column">
+                <h2>Notes</h2>
+                <textarea id="notes" rows="10" placeholder="Write your notes here..."></textarea>
+                <button onclick="publishNote()">Publish Note</button>
+                <div class="published-notes" id="published-notes">
+                    <h2>Published Notes</h2>
+                </div>
+            </div>
+            <div class="column">
+                <h2>Checklist</h2>
+                <ul id="checklist">
+                    <li><input type="checkbox"> Task 1</li>
+                    <li><input type="checkbox"> Task 2</li>
+                    <li><input type="checkbox"> Task 3</li>
+                </ul>
+                <input type="text" id="new-item" placeholder="Add new checklist item">
+                <button onclick="addItem()">Add</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function addToDo() {
+            const toDoText = document.getElementById('todo').value;
+            if (toDoText === '') return;
+
+            const li = document.createElement('li');
+            li.textContent = toDoText;
+
+            document.getElementById('todo-list').appendChild(li);
+            document.getElementById('todo').value = '';
+        }
+
+        function publishNote() {
+            const notesText = document.getElementById('notes').value;
+            if (notesText === '') return;
+
+            const div = document.createElement('div');
+            div.textContent = notesText;
+
+            document.getElementById('published-notes').appendChild(div);
+            document.getElementById('notes').value = '';
+        }
+
+        function addItem() {
+            const newItemText = document.getElementById('new-item').value;
+            if (newItemText === '') return;
+
+            const li = document.createElement('li');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            li.appendChild(checkbox);
+            li.appendChild(document.createTextNode(' ' + newItemText));
+
+            document.getElementById('checklist').appendChild(li);
+            document.getElementById('new-item').value = '';
+        }
+    </script>
+</body>
+</html>
